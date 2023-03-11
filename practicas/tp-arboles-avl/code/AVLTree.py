@@ -12,17 +12,8 @@ class AVLNode:
 
 
 def rotateLeft(Tree, avlnode):
-  Tree.root = Tree.root.rightnode
-  Tree.root.leftnode = Tree.root.parent
-  Tree.root.parent = None
-  return Tree.root.key
-
-  ## Falta agregar caso en que el nodo 2 tenga un hijo izq
-
-
-'''
-  avlnode.leftnode = Tree.root
-  Tree.root = Tree.root.rightnode
-  return Tree.root.key
-
-'''
+  aux = avlnode
+  Tree.root = avlnode.rightnode
+  aux_2 = Tree.root.leftnode
+  Tree.root.leftnode = aux
+   
