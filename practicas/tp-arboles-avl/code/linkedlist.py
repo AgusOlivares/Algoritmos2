@@ -93,7 +93,7 @@ def Delete(L, element):
     ## Elimina un objeto de la lista, la lista se acorta
 
     current = L.head
-    contador = search(L, element)
+    contador = Search(L, element)
 
     if contador == None:
         return None

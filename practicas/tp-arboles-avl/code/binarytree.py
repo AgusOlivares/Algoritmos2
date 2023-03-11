@@ -209,7 +209,7 @@ def mayor_menores(node):
 
 
 def deleteKey(B, key):
-    node = searchR_key(B.root, key)
+    node = searchR.key(B.root, key)
 
     if node == None:
         return None
