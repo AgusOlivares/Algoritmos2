@@ -36,7 +36,7 @@ def rotateRight(Tree, avlnode):
   if raizNueva.rightnode is None:
    raizNueva.rightnode = raizVieja
   else:
-    raizNueva.leftnode = raizVieja
+    raizNueva.rightnode = raizVieja
     raizVieja.leftnode = aux
 
   return raizNueva
@@ -68,3 +68,37 @@ def balanceRecursive(node):
      altura = max(height_left , height_right)
 
      return 1 + altura
+
+def reBalance(AVLTree):
+   
+  node = AVLNode()
+  node = AVLTree.root
+
+  if node.bf != 0 and node.bf != 1 and node.bf != -1:
+    if node.bf < -1:
+      rotateLeft(AVLTree, node)
+    if node.bf > 1:
+      rotateRight(AVLTree, node)
+      
+  reBalance_R(node.leftnode)
+  reBalance_R(node.rightnode)
+
+  return node
+
+     
+
+def reBalance_R(node):
+
+  if node == None:
+    return
+
+  if node.bf != 0 and node.bf != 1 and node.bf != -1:
+    if node.bf < -1:
+      rotateLeft(AVLTree, node)
+    if node.bf > 1:
+      rotateRight(AVLTree, node)
+  
+  reBalance_R(node.leftnode)
+  reBalance_R(node.rightnode)
+
+  return node
