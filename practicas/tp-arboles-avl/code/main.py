@@ -19,3 +19,5 @@ print(B.value)
 print(B.leftnode.value)
 print(B.rightnode.value)
 print(B.leftnode.rightnode.value)
+
+
