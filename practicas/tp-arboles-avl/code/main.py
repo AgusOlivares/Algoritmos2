@@ -1,58 +1,37 @@
 import binarytree as bt
 import AVLTree as avl
 
-'''
-B = bt.BinaryTree()
-bt.insert(B , "A" , 10)
-bt.insert(B , "B" , 12)
-bt.insert(B , "D" , 11) 
-bt.insert(B , "C" , 15) 
+Tree = avl.AVLTree()
+#nodo1
+A = avl.AVLNode
+A.key = 5
+
+#nodo2
+B = avl.AVLNode()
+B.key = 10
+
+#nodo3
+C = avl.AVLNode()
+C.key = 3
+
+#nodo4
+D = avl.AVLNode()
+D.key = 14
+
+#nodo5
+E = avl.AVLNode()
+E.key = 12
+
+avl.insert(Tree, 5)
+avl.insert(Tree, 10)
+avl.insert(Tree, 3)
+avl.insert(Tree, 14)
+avl.insert(Tree, 12)
 
 
-print(B.root.value)
-print(B.root.rightnode.value)
-print(B.root.rightnode.leftnode.value)
-print(B.root.rightnode.rightnode.value)
-print("--"*5)
+print(Tree.root.key)
 
-B = avl.rotateLeft(B , B.root )
-print(B.value)
-print(B.leftnode.value)
-print(B.rightnode.value)
-print(B.leftnode.rightnode.value)
+## Agrega el balance factor a los nodos
+avl.calculateBalance(Tree)
 
-'''
-## Codigo de pruba hecho por victor, probar
 
-#Llenamos un arbol avl
-B = avl.AVLTree()
-#Nodo 1
-nodeA = avl.AVLNode()
-nodeA.value = "A"
-nodeA.key = 10
-#Nodo B
-nodeB = avl.AVLNode()
-nodeB.value = "B"
-nodeB.key = 5
-#Nodo C
-nodeC = avl.AVLNode()
-nodeC.value = "C"
-nodeC.key = 15
-
-#Nodo D
-nodeD = avl.AVLNode()
-nodeD.value = "D"
-nodeD.key = 3
-
-#Hacemos que el B.root sea el nodoA y asignamos los hijos de A
-nodeA.leftnode = nodeB
-nodeA.rightnode = nodeC
-nodeA.leftnode.leftnode = nodeD
-B.root = nodeA
-
-new_arbol = avl.calculateBalance(B.root)
-
-print(new_arbol.bf)
-print(new_arbol.leftnode.bf)
-print(new_arbol.rightnode.bf)
-print(new_arbol.leftnode.leftnode.bf)
