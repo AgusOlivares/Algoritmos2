@@ -16,6 +16,9 @@ def rotateLeft(Tree, avlnode):
   raizVieja = avlnode
   Tree.root = avlnode.rightnode
   raizNueva = Tree.root
+  ## Desconecto la vieja raiz del nodo superior en caso de tenerlo
+  raizNueva.parent = raizVieja.parent
+  raizVieja.parent = raizNueva 
   aux = Tree.root.leftnode
 
   if raizNueva.leftnode is None:
@@ -31,6 +34,9 @@ def rotateRight(Tree, avlnode):
   raizVieja = avlnode
   Tree.root = avlnode.leftnode
   raizNueva = Tree.root
+  ## Desconecto la vieja raiz del nodo superior en caso de tenerlo
+  raizNueva.parent = raizVieja.parent
+  raizVieja.parent = raizNueva 
   aux = Tree.root.rightnode
 
   if raizNueva.rightnode is None:
@@ -71,38 +77,44 @@ def balanceRecursive(node):
 
 def reBalance(AVLTree):
    
+  
   node = AVLNode()
   node = AVLTree.root
-  ## 
-  if node.bf != 0 and node.bf != 1 and node.bf != -1:
-    if node.bf < -1:
-      #if node.rightnode.bf < -1:
-      rotateLeft(AVLTree, node)
-    if node.bf > 1:
-      rotateRight(AVLTree, node)
-      
-  reBalance_R(AVLTree, node.leftnode)
-  reBalance_R(AVLTree, node.rightnode)
 
+
+  if node.bf < -1:
+    reBalance_R(AVLTree, node.rightnode)
+    
+  if node.bf > 1:
+    reBalance_R(AVLTree, node.leftnode)
+    
+    
   return node
 
-     
+    
 
 def reBalance_R(AVLTree, node):
 
-  if node == None:
+  if node is None:
     return
 
-  if node.bf != 0 and node.bf != 1 and node.bf != -1:
-    if node.bf < -1:
+  if node.bf < 0: 
+    if node.rightnode.bf > 0 :
+      rotateRight(AVLTree, node.rightnode)
+      rotateLeft(AVLTree, node.parent)
+    else:
       rotateLeft(AVLTree, node)
-    if node.bf > 1:
+
+  if node.bf > 0:
+    if node.leftnode.bf > 1 :
+      rotateLeft(AVLTree, node.leftnode)
+      rotateRight(AVLTree, node.parent)
+    else:
       rotateRight(AVLTree, node)
-  
-  reBalance_R(node.leftnode)
-  reBalance_R(node.rightnode)
+
 
   return node
+
 
 ## Primera Version
 ## Implemento insert basico para crear el arbol

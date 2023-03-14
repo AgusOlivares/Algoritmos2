@@ -28,10 +28,28 @@ avl.insert(Tree, 3)
 avl.insert(Tree, 14)
 avl.insert(Tree, 12)
 
-
-print(Tree.root.key)
+## Verificacion Raiz 
+# print(Tree.root.key)
 
 ## Agrega el balance factor a los nodos
+## Esto hay que mejorarlo, tiene que ir dentro de las implementaciones, no hacerlo de forma manual
 avl.calculateBalance(Tree)
+
+#print(Tree.root.rightnode.bf)
+
+## Prueba reBalance
+avl.reBalance(Tree)
+'''
+print(Tree.root.key)
+print(Tree.root.leftnode.key)
+print(Tree.root.rightnode.key)
+
+
+
+
+
+print(Tree.root.rightnode.key)
+
+'''
 
 
