@@ -16,10 +16,16 @@ def rotateLeft(Tree, avlnode):
   raizVieja = avlnode
   Tree.root = avlnode.rightnode
   raizNueva = Tree.root
-  ## Desconecto la vieja raiz del nodo superior en caso de tenerlo
+
+
+  ## Desconecto la vieja raiz del nodo superior en caso de tenerlo ··· solucion: me falto desconectar al padre del hijo
+  ## por lo que si bien la raiz vieja se desconecto de su nodo padre, el padre sigue conectado a la raiz vieja
+  
   raizNueva.parent = raizVieja.parent
+  raizVieja.parent.leftnode = raizNueva
   raizVieja.parent = raizNueva 
-  aux = Tree.root.leftnode
+  
+  aux = Tree.root.leftnode 
 
   if raizNueva.leftnode is None:
    raizNueva.leftnode = raizVieja
@@ -34,9 +40,17 @@ def rotateRight(Tree, avlnode):
   raizVieja = avlnode
   Tree.root = avlnode.leftnode
   raizNueva = Tree.root
+
+
+
   ## Desconecto la vieja raiz del nodo superior en caso de tenerlo
+  ### Me falta desconectar el nodo superior del left o right node correspondiente
+  
+  
   raizNueva.parent = raizVieja.parent
+  raizVieja.parent.rightnode = raizNueva 
   raizVieja.parent = raizNueva 
+
   aux = Tree.root.rightnode
 
   if raizNueva.rightnode is None:
@@ -81,36 +95,46 @@ def reBalance(AVLTree):
   node = AVLNode()
   node = AVLTree.root
 
+  # Modificacion: hago que reBalance_R reciba un parametro en vez de 2
 
+  # El arbol esta desbalanceado por derecha
   if node.bf < -1:
-    reBalance_R(AVLTree, node.rightnode)
+    reBalance_R(node.rightnode)
     
+  # El arbol esta desbalanceado por izquierda
   if node.bf > 1:
-    reBalance_R(AVLTree, node.leftnode)
+    reBalance_R(node.leftnode)
     
     
   return node
 
     
 
-def reBalance_R(AVLTree, node):
+def reBalance_R(node):
 
   if node is None:
     return
+  
+  # Modificacion : En la version anterior recibia el arbol original, falla: modificaba la raiz del arbol original...
+  # ... Ahora al tener un arbol auxiliar, modifico al subarbol
+  
+  arbol_aux = AVLTree
+  arbol_aux.root = node
 
   if node.bf < 0: 
     if node.rightnode.bf > 0 :
-      rotateRight(AVLTree, node.rightnode)
-      rotateLeft(AVLTree, node.parent)
+      
+      rotateRight(arbol_aux, node.rightnode)
+      rotateLeft(arbol_aux, node) ## de aca elimine los .parent
     else:
-      rotateLeft(AVLTree, node)
+      rotateLeft(arbol_aux, node)
 
   if node.bf > 0:
     if node.leftnode.bf > 1 :
-      rotateLeft(AVLTree, node.leftnode)
-      rotateRight(AVLTree, node.parent)
+      rotateLeft(arbol_aux, node.leftnode)
+      rotateRight(arbol_aux, node) ## de aca elimine los .parent
     else:
-      rotateRight(AVLTree, node)
+      rotateRight(arbol_aux, node)
 
 
   return node
