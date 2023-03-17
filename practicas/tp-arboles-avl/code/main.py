@@ -24,9 +24,10 @@ E.key = 12
 
 avl.insert(Tree, 5)
 avl.insert(Tree, 10)
-avl.insert(Tree, 3)
+#avl.insert(Tree, 3)
 avl.insert(Tree, 14)
 avl.insert(Tree, 12)
+avl.insert(Tree, 13)
 
 ## Verificacion Raiz 
 # print(Tree.root.key)
@@ -35,13 +36,15 @@ avl.insert(Tree, 12)
 ## Esto hay que mejorarlo, tiene que ir dentro de las implementaciones, no hacerlo de forma manual
 avl.calculateBalance(Tree)
 
-print(Tree.root.rightnode.bf)
-print(Tree.root.key)
+
 ## Prueba reBalance
+#avl.reBalance(Tree)
+
 avl.reBalance(Tree)
-print(Tree.root.key)
-print(Tree.root.leftnode.key)
-print(Tree.root.leftnode.parent.key)
+
+print(Tree.root.rightnode.rightnode.leftnode.rightnode.leftnode.rightnode.key)
+
+
 
 '''
 print(Tree.root.rightnode.key)

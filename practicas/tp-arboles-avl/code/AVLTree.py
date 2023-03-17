@@ -18,19 +18,10 @@ def rotateLeft(Tree, avlnode):
   raizNueva = Tree.root
 
 
-  ## Desconecto la vieja raiz del nodo superior en caso de tenerlo ··· solucion: me falto desconectar al padre del hijo
-  ## por lo que si bien la raiz vieja se desconecto de su nodo padre, el padre sigue conectado a la raiz vieja
-  
-  raizNueva.parent = raizVieja.parent
-  raizVieja.parent.leftnode = raizNueva
-  raizVieja.parent = raizNueva 
-  
   aux = Tree.root.leftnode 
+  raizNueva.leftnode = raizVieja
 
   if raizNueva.leftnode is None:
-   raizNueva.leftnode = raizVieja
-  else:
-    raizNueva.leftnode = raizVieja
     raizVieja.rightnode = aux
 
   return raizNueva
@@ -42,27 +33,19 @@ def rotateRight(Tree, avlnode):
   raizNueva = Tree.root
 
 
-
-  ## Desconecto la vieja raiz del nodo superior en caso de tenerlo
-  ### Me falta desconectar el nodo superior del left o right node correspondiente
-  
-  
-  raizNueva.parent = raizVieja.parent
-  raizVieja.parent.rightnode = raizNueva 
-  raizVieja.parent = raizNueva 
-
   aux = Tree.root.rightnode
+  raizNueva.rightnode = raizVieja
 
   if raizNueva.rightnode is None:
-   raizNueva.rightnode = raizVieja
-  else:
-    raizNueva.rightnode = raizVieja
     raizVieja.leftnode = aux
 
   return raizNueva
   
 
 def calculateBalance(ALVTree):
+     
+     if ALVTree is None:
+       return 
      node = AVLNode()
      node = ALVTree.root
      #Queremos actualizar el node.bf
@@ -71,12 +54,12 @@ def calculateBalance(ALVTree):
      bf = height_left - height_right
      node.bf = bf
 
-     return node
+     return ALVTree
      
 
 def balanceRecursive(node):
      
-     if node == None:
+     if node is None:
           return 0
      
      height_left = balanceRecursive(node.leftnode)
@@ -99,12 +82,13 @@ def reBalance(AVLTree):
 
   # El arbol esta desbalanceado por derecha
   if node.bf < -1:
-    reBalance_R(node.rightnode)
+   node = reBalance_R(node.rightnode)
     
   # El arbol esta desbalanceado por izquierda
   if node.bf > 1:
-    reBalance_R(node.leftnode)
+   node = reBalance_R(node.leftnode)
     
+  #calculateBalance(AVLTree)
     
   return node
 
@@ -114,28 +98,40 @@ def reBalance_R(node):
 
   if node is None:
     return
-  
-  # Modificacion : En la version anterior recibia el arbol original, falla: modificaba la raiz del arbol original...
-  # ... Ahora al tener un arbol auxiliar, modifico al subarbol
-  
-  arbol_aux = AVLTree
-  arbol_aux.root = node
+
+  arbol = AVLTree()
+  arbol.root = node
+
+  # Rebalanceo los subarboles del nodo ingresado de forma recursiva
+  # de esta manera busco el nodo desbalanceado
+  node.rightnode = reBalance_R(node.rightnode)
+  node.leftnode = reBalance_R(node.leftnode)
+
 
   if node.bf < 0: 
+
     if node.rightnode.bf > 0 :
       
-      rotateRight(arbol_aux, node.rightnode)
-      rotateLeft(arbol_aux, node) ## de aca elimine los .parent
+
+      rotateRight(AVLTree, node.rightnode)
+      rotateLeft(AVLTree, node) 
     else:
-      rotateLeft(arbol_aux, node)
+      rotateLeft(AVLTree, node)
+    
+  
 
   if node.bf > 0:
-    if node.leftnode.bf > 1 :
-      rotateLeft(arbol_aux, node.leftnode)
-      rotateRight(arbol_aux, node) ## de aca elimine los .parent
-    else:
-      rotateRight(arbol_aux, node)
 
+    if node.leftnode.bf > 1 :
+
+      rotateLeft(AVLTree, node.leftnode)
+      rotateRight(AVLTree, node) 
+    else:
+      rotateRight(AVLTree, node)
+
+
+  
+  
 
   return node
 
