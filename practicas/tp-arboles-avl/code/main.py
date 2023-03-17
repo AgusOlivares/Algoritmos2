@@ -2,6 +2,7 @@ import binarytree as bt
 import AVLTree as avl
 
 Tree = avl.AVLTree()
+'''
 #nodo1
 A = avl.AVLNode
 A.key = 5
@@ -21,13 +22,14 @@ D.key = 14
 #nodo5
 E = avl.AVLNode()
 E.key = 12
+'''
 
 avl.insert(Tree, 5)
 avl.insert(Tree, 10)
 #avl.insert(Tree, 3)
 avl.insert(Tree, 14)
-avl.insert(Tree, 12)
-avl.insert(Tree, 13)
+#avl.insert(Tree, 12)
+#avl.insert(Tree, 13)
 
 ## Verificacion Raiz 
 # print(Tree.root.key)
@@ -38,11 +40,13 @@ avl.calculateBalance(Tree)
 
 
 ## Prueba reBalance
-#avl.reBalance(Tree)
+
+# solo 3 nodos: 5, 10, 14 ##
+print(Tree.root.key)
 
 avl.reBalance(Tree)
 
-print(Tree.root.rightnode.rightnode.leftnode.rightnode.leftnode.rightnode.key)
+print(Tree.root.rightnode.key)
 
 
 
