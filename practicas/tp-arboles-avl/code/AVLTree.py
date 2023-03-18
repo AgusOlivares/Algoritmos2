@@ -87,15 +87,14 @@ def reBalance(AVLTree):
   
   node = AVLNode()
   node = AVLTree.root
-
-  # Modificacion: hago que reBalance_R reciba un parametro en vez de 2
+  calculateBalance(AVLTree)
+  ### Problema: no se rebalancea la raiz
 
   # Balanceo tanto la rama izquierda como la derecha del arbol
   node.rightnode = reBalance_R(node.rightnode)
     
   node.leftnode =reBalance_R(node.leftnode)
     
-  calculateBalance(AVLTree)
     
   return AVLTree
 
@@ -111,10 +110,11 @@ def reBalance_R(node):
 
   # Rebalanceo los subarboles del nodo ingresado de forma recursiva
   # de esta manera busco el nodo desbalanceado
+
   node.rightnode = reBalance_R(node.rightnode)
   node.leftnode = reBalance_R(node.leftnode)
 
-  calculateBalance(arbol)
+  
   
   # El arbol esta desbalanceado por derecha
 
@@ -125,23 +125,27 @@ def reBalance_R(node):
       # puse arbol en vez de avltree
       rotateRight(arbol, node.rightnode)
       rotateLeft(arbol, node) 
+      calculateBalance(arbol)
     else:
       # deberia poner arbol?
       #puse arbol en vez de avltree
       rotateLeft(arbol, node)
+      calculateBalance(arbol)
     
   
   # El arbol esta desbalanceado por izquierda
 
   if node.bf > 0:
 
-    if node.leftnode.bf > 0 :
+    if node.leftnode.bf < 0 :
       # puse arbol en vez de avltree
       rotateLeft(arbol, node.leftnode)
       rotateRight(arbol, node) 
+      calculateBalance(arbol)
     else:
       # puse arbol en vez de avltree
       rotateRight(arbol, node)
+      calculateBalance(arbol)
 
 
   return node
@@ -182,6 +186,3 @@ def insertR(current, new_node):
       return new_node
     else:
       return insertR(current.rightnode, new_node)
-
-
-

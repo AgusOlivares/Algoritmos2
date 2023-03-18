@@ -1,4 +1,3 @@
-import binarytree as bt
 import AVLTree as avl
 
 Tree = avl.AVLTree()
@@ -27,7 +26,7 @@ E.key = 12
 avl.insert(Tree, 5)
 avl.insert(Tree, 10)
 #avl.insert(Tree, 3)
-avl.insert(Tree, 14)
+avl.insert(Tree, 7)
 #avl.insert(Tree, 12)
 #avl.insert(Tree, 13)
 
@@ -36,17 +35,16 @@ avl.insert(Tree, 14)
 
 ## Agrega el balance factor a los nodos
 ## Esto hay que mejorarlo, tiene que ir dentro de las implementaciones, no hacerlo de forma manual
-avl.calculateBalance(Tree)
 
 
 ## Prueba reBalance
 
-# solo 3 nodos: 5, 10, 14 ##
+# solo 3 nodos: 5, 10, 7 ## Falla
 print(Tree.root.key)
 
 avl.reBalance(Tree)
 
-print(Tree.root.rightnode.key)
+print(Tree.root.key)
 
 
 
