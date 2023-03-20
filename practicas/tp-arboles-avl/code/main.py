@@ -1,33 +1,13 @@
 import AVLTree as avl
 
 Tree = avl.AVLTree()
-'''
-#nodo1
-A = avl.AVLNode
-A.key = 5
 
-#nodo2
-B = avl.AVLNode()
-B.key = 10
-
-#nodo3
-C = avl.AVLNode()
-C.key = 3
-
-#nodo4
-D = avl.AVLNode()
-D.key = 14
-
-#nodo5
-E = avl.AVLNode()
-E.key = 12
-'''
 
 avl.insert(Tree, 5)
 avl.insert(Tree, 10)
-#avl.insert(Tree, 3)
+avl.insert(Tree, 3)
 avl.insert(Tree, 7)
-#avl.insert(Tree, 12)
+avl.insert(Tree, 12)
 #avl.insert(Tree, 13)
 
 ## Verificacion Raiz 
@@ -45,6 +25,7 @@ print(Tree.root.key)
 avl.reBalance(Tree)
 
 print(Tree.root.key)
+print(Tree.root)
 
 
 

@@ -16,18 +16,19 @@ def rotateLeft(Tree, avlnode):
   raizVieja = avlnode
   Tree.root = avlnode.rightnode
   raizNueva = Tree.root
+  aux = Tree.root.leftnode 
 
-  raizNueva.parent = avlnode.parent
-  raizNueva.parent.rightnode = raizNueva
-  raizVieja.parent = raizNueva
-  # no desconecte la raiz vieja de la nueva raiz
-  raizVieja.rightnode = None
-
-  aux = raizNueva.leftnode 
   raizNueva.leftnode = raizVieja
+  raizNueva.parent = raizVieja.parent
+
+  raizVieja.rightnode = None
+  raizVieja.parent = raizNueva
+  
+
 
   if aux is not None:
     raizVieja.rightnode = aux
+    aux.parent = raizVieja
 
   return raizNueva
 
@@ -36,18 +37,19 @@ def rotateRight(Tree, avlnode):
   raizVieja = avlnode
   Tree.root = avlnode.leftnode
   raizNueva = Tree.root
+  aux = Tree.root.rightnode
 
-  raizNueva.parent = avlnode.parent
-  raizNueva.parent.leftnode = raizNueva
-  raizVieja.parent = raizNueva
-  # no desconecte la raiz vieja de la nueva raiz
-  raizVieja.leftnode = None
-
-  aux = raizNueva.rightnode
   raizNueva.rightnode = raizVieja
+  raizNueva.parent = raizVieja.parent
+
+  raizVieja.leftnode = None
+  raizVieja.parent = raizNueva
+  
+
 
   if aux is not None:
     raizVieja.leftnode = aux
+    aux.parent = raizVieja
 
   return raizNueva
   
@@ -85,70 +87,57 @@ def balanceRecursive(node):
 def reBalance(AVLTree):
    
   
-  node = AVLNode()
-  node = AVLTree.root
   calculateBalance(AVLTree)
   ### Problema: no se rebalancea la raiz
 
-  # Balanceo tanto la rama izquierda como la derecha del arbol
-  node.rightnode = reBalance_R(node.rightnode)
-    
-  node.leftnode =reBalance_R(node.leftnode)
+  # Balanceo todo el arbol de una sola vez
+  AVLTree = reBalance_R(AVLTree ,AVLTree.root)
     
     
   return AVLTree
 
-   
+    
 
-def reBalance_R(node):
+def reBalance_R(AVLTree, node):
 
-  if node is None:
-    return
+  if node.leftnode is not None:
+    reBalance_R(AVLTree, node.leftnode)
 
-  arbol = AVLTree()
-  arbol.root = node
-
-  # Rebalanceo los subarboles del nodo ingresado de forma recursiva
-  # de esta manera busco el nodo desbalanceado
-
-  node.rightnode = reBalance_R(node.rightnode)
-  node.leftnode = reBalance_R(node.leftnode)
-
-  
   
   # El arbol esta desbalanceado por derecha
 
-  if node.bf < 0: 
+  if node.bf < -1: 
 
     if node.rightnode.bf > 0 :
       
       # puse arbol en vez de avltree
-      rotateRight(arbol, node.rightnode)
-      rotateLeft(arbol, node) 
-      calculateBalance(arbol)
+      rotateRight(AVLTree, node.rightnode)
+      rotateLeft(AVLTree, node) 
+      calculateBalance(AVLTree)
     else:
       # deberia poner arbol?
       #puse arbol en vez de avltree
-      rotateLeft(arbol, node)
-      calculateBalance(arbol)
+      rotateLeft(AVLTree, node)
+      calculateBalance(AVLTree)
     
   
   # El arbol esta desbalanceado por izquierda
 
-  if node.bf > 0:
+  if node.bf > 1:
 
     if node.leftnode.bf < 0 :
       # puse arbol en vez de avltree
-      rotateLeft(arbol, node.leftnode)
-      rotateRight(arbol, node) 
-      calculateBalance(arbol)
+      rotateLeft(AVLTree, node.leftnode)
+      rotateRight(AVLTree, node) 
+      calculateBalance(AVLTree)
     else:
       # puse arbol en vez de avltree
-      rotateRight(arbol, node)
-      calculateBalance(arbol)
+      rotateRight(AVLTree, node)
+      calculateBalance(AVLTree)
 
+  if node.rightnode is not None:
+    reBalance_R(AVLTree, node.rightnode)
 
-  return node
 
 
 ## Primera Version
