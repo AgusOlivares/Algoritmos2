@@ -173,3 +173,87 @@ def insertR(current, new_node):
       return new_node
     else:
       return insertR(current.rightnode, new_node)
+    
+
+
+def search(AVLTree, key):
+    current = searchR(AVLTree.root, key)
+    if current == None:
+        return None
+    else:
+        return current
+
+def searchR(node, key):
+
+    if node == None:
+        return None
+    if node.key == key:
+        return node
+
+    leftNode = searchR(node.leftnode, key)
+    if leftNode != None:
+
+        return leftNode
+
+    rightNode = searchR(node.rightnode, key)
+    if rightNode != None:
+
+        return rightNode
+
+  # Implementacion delete
+
+def delete(AVLTree, key):
+  node = searchR(AVLTree.root, key)
+  if node == None:
+      return None
+  else:
+      deleteR(AVLTree, node)
+      calculateBalance(AVLTree)
+      reBalance(AVLTree)
+  
+def deleteR(AVLTree, node):
+
+    #Caso 1: elimino una hoja
+    if node.leftnode == None and node.rightnode == None:
+        if node.parent.leftnode == node:
+            node.parent.leftnode = None
+            return node.key
+        elif node.parent.rightnode == node:
+            node.parent.rightnode = None
+            return node.key
+
+    #Caso 2: elimino un nodo con un hijo del lado izquierdo
+    if node.leftnode != None and node.rightnode == None:
+        if node.parent.leftnode != None and node.parent.leftnode == node:
+            node.parent.leftnode = node.leftnode
+            return node.key
+        elif node.parent.rightnode != None and node.parent.rightnode == node:
+            node.parent.rightnode = node.leftnode
+            return node.key
+
+    #Caso 3: elimino un nodo con un hijo del lado derecho
+    if node.rightnode != None and node.leftnode == None:
+        if node.parent.rightnode != None and node.parent.rightnode == node:
+            node.parent.rightnode = node.rightnode
+            return node.key
+        elif node.parent.leftnode != None and node.parent.leftnode == node:
+            node.parent.leftnode = node.rightnode
+            return node.key
+
+    #Caso 4: Elimino un nodo que tiene 2 hijos
+    mayor = mayor_menores(node.leftnode)
+    aux = node.key
+    node.value = mayor.value
+    node.key = mayor.key
+
+    mayor.parent.rightnode = mayor.leftnode
+    return aux
+
+def mayor_menores(node):
+
+    if node.rightnode != None:
+        currentNode = mayor_menores(node.rightnode)
+        if currentNode != None:
+            return currentNode
+    else:
+        return node
