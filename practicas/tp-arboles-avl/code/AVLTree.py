@@ -88,7 +88,6 @@ def reBalance(AVLTree):
    
   
   calculateBalance(AVLTree)
-  ### Problema: no se rebalancea la raiz
 
   # Balanceo todo el arbol de una sola vez
   AVLTree = reBalance_R(AVLTree ,AVLTree.root)
@@ -110,13 +109,12 @@ def reBalance_R(AVLTree, node):
 
     if node.rightnode.bf > 0 :
       
-      # puse arbol en vez de avltree
+      
       rotateRight(AVLTree, node.rightnode)
       rotateLeft(AVLTree, node) 
       calculateBalance(AVLTree)
     else:
-      # deberia poner arbol?
-      #puse arbol en vez de avltree
+      
       rotateLeft(AVLTree, node)
       calculateBalance(AVLTree)
     
@@ -126,12 +124,10 @@ def reBalance_R(AVLTree, node):
   if node.bf > 1:
 
     if node.leftnode.bf < 0 :
-      # puse arbol en vez de avltree
       rotateLeft(AVLTree, node.leftnode)
       rotateRight(AVLTree, node) 
       calculateBalance(AVLTree)
     else:
-      # puse arbol en vez de avltree
       rotateRight(AVLTree, node)
       calculateBalance(AVLTree)
 
@@ -140,9 +136,8 @@ def reBalance_R(AVLTree, node):
 
 
 
-## Primera Version
-## Implemento insert basico para crear el arbol
-## Aun no inserta el nodo balanceando el arbol
+# Segunda Version
+## Ahora balancea el arbol al insertar el nodo
 def insert(AVLTree, key):
 
   new_node = AVLNode()
@@ -154,8 +149,11 @@ def insert(AVLTree, key):
     return new_node
   
   else:
-    return insertR(current, new_node)
+    insertR(current, new_node)
 
+  calculateBalance(AVLTree)
+  reBalance(AVLTree)
+  return
     
       
 def insertR(current, new_node):
