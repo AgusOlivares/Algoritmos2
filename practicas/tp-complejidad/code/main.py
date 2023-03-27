@@ -1,3 +1,4 @@
+# Ejercicio 4
 def ordenar_list(list):
     medio = len(list)//2
     aux = list[medio-1] 
@@ -47,6 +48,8 @@ print(list)
 list = ordenar_list(list)
 print(list)
 
+
+# Ejercicio 5
 
 #Al contener la funcion sort, la complejidad se eleva a O(n log n) en el peor de los casos
 # Tita(n log n)
