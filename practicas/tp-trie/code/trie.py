@@ -1,3 +1,5 @@
+import linkedlist as ll
+
 class Trie:
   root = None
 
@@ -12,7 +14,8 @@ class TrieNode:
 def insert(T, element):
 
     if T.root is None:
-        node = TrieNode()
+        L = 
+        node = 
         T.root = node
     lista = list(element)
     insertR(T.root, lista, 0)
@@ -25,12 +28,13 @@ def insertR(Tnode, lista, i):
        new_node = TrieNode()
        Tnode.children = new_node
        new_node.parent = Tnode
-       new_node.key = lista.pop([i]) 
-       insertR(new_node, lista, i+1)
+       new_node.key = lista.pop() 
+       return insertR(new_node, lista, i+1)
+       
     else:
        Tnode.isEndOfWord = True
 
-
+    return
   #node = TrieNode()
   #node1.parent = T.root
   #node1.key = palabra.pop()
