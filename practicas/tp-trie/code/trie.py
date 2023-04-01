@@ -14,22 +14,24 @@ class TrieNode:
 def insert(T, element):
 
     if T.root is None:
-        L = 
-        node = 
+        L = ll.LinkedList()
+        node = TrieNode()
+        node.key = L
         T.root = node
+      
     lista = list(element)
-    insertR(T.root, lista, 0)
+    insertR(T.root, lista)
 
 
-def insertR(Tnode, lista, i):
+def insertR(Tnode, lista):
 
-    if lista is not []:
-       i = 0
+    if lista != []:
+       
        new_node = TrieNode()
        Tnode.children = new_node
        new_node.parent = Tnode
-       new_node.key = lista.pop() 
-       return insertR(new_node, lista, i+1)
+       new_node.key = lista.pop(0) 
+       return insertR(new_node, lista)
        
     else:
        Tnode.isEndOfWord = True
