@@ -1,4 +1,3 @@
-import linkedlist as ll
 
 class Trie:
   root = None
@@ -6,6 +5,7 @@ class Trie:
 
 class TrieNode:
   parent = None
+  nextNode = None
   children = None
   key = None
   isEndOfWord = False
@@ -14,12 +14,25 @@ class TrieNode:
 def insert(T, element):
 
     if T.root is None:
-        L = ll.LinkedList()
         node = TrieNode()
-        node.key = L
+        node.key = None
         T.root = node
       
     lista = list(element)
+
+    if SerchL(T.root.children, lista[0]) == False:      ## Intento implementar la linkedlist agregando un parametro extra en el TrieNode para que haga una lista dentro del mismo nodo
+                                                        ## Va a ser mas o menos como que me puedo mover para arriba, para abajo y tambien para la Izq dentro del mismo nodo
+       
+        if T.root.children is None:
+          
+            node = TrieNode()
+
+
+
+
+
+
+
     insertR(T.root, lista)
 
 
@@ -37,6 +50,14 @@ def insertR(Tnode, lista):
        Tnode.isEndOfWord = True
 
     return
-  #node = TrieNode()
-  #node1.parent = T.root
-  #node1.key = palabra.pop()
+  
+
+def SerchL(Node, element):
+
+    while Node != None:
+        if Node.key == element:
+            return True
+        else:
+            Node = Node.nextNode
+    return False
+    
