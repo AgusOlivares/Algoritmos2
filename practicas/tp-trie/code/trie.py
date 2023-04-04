@@ -11,25 +11,60 @@ class TrieNode:
   isEndOfWord = False
 
 
+
+
+
+
+
+
+  
+
 def insert(T, element):
 
     if T.root is None:
         node = TrieNode()
-        node.key = None
         T.root = node
-      
-    lista = list(element)
+        
+    current = T.root.children       ## Elijo el nodo "Head" de la lista, si es que existe
+    Flag = False
 
-    if SerchL(T.root.children, lista[0]) == False:      ## Intento implementar la linkedlist agregando un parametro extra en el TrieNode para que haga una lista dentro del mismo nodo
-                                                        ## Va a ser mas o menos como que me puedo mover para arriba, para abajo y tambien para la Izq dentro del mismo nodo
-       
-        if T.root.children is None:
-          
-            node = TrieNode()
+    if current is None:
+        new_node = TrieNode()
+        new_node.parent = T.root
+        T.root.children = new_node 
+        current = new_node
+
+    for i in range(len(element)):
+        if current.key == None:
+            current.key = element[i]
+            Flag = True
+        else:
+            if SearchL(current, element[i]) == None and Flag == False: 
+            
+                new_node = TrieNode()
+                current.nextNode = new_node
+                new_node.key = element[i]
+                Flag = True
+                current = new_node
+            else:  
+                
+
+                new_node = TrieNode()       ## Creo que la diferencia es que en la primera iteracion se va a conectar a la raiz                                     ## y luego voy a poder trabajar con el nodo que quiera
+                new_node.parent = current
+                current.children = new_node
+                new_node.key = element[i]
+                if element[i] == element[len(element)-1]:
+                    new_node.isEndOfWord = True
+                current = new_node
+
+
+
+    
 
 
 
 
+'''
 
 
 
@@ -52,12 +87,13 @@ def insertR(Tnode, lista):
     return
   
 
-def SerchL(Node, element):
+'''
+def SearchL(Node, element):
 
     while Node != None:
         if Node.key == element:
-            return True
+            return Node
         else:
             Node = Node.nextNode
-    return False
+    return None
     

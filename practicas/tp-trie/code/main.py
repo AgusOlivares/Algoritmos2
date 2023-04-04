@@ -1,6 +1,7 @@
 import trie as tr
 
 Arbol = tr.Trie()
-
-tr.insert(Arbol, "hola")
-print(Arbol.root.children.key)
+# Caso 1: Inserto una palabra     # Funciona
+tr.insert(Arbol, "Hola")
+# Caso 2: Inserto una palabra distinta      #
+tr.insert(Arbol, "Rapido")
