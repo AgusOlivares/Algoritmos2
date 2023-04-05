@@ -6,3 +6,4 @@ tr.insert(Arbol, "Hola")
 # Caso 2: Inserto varias palabras distintas      # >2 Falla
 tr.insert(Arbol, "Rapido")
 tr.insert(Arbol, "Javier")
+tr.insert(Arbol, "Mameluco")

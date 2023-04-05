@@ -41,7 +41,8 @@ def insert(T, element):
         else:
             if SearchL(current, element[i]) == None and Flag == False: 
             
-                new_node = TrieNode()
+                new_node = TrieNode() ## Se complica al insertar mas de dos palablar porque empiezan a pisar el campo nextNode y no se conectan de forma efectiva
+                new_node.nextNode = current.nextNode
                 current.nextNode = new_node
                 new_node.key = element[i]
                 Flag = True
