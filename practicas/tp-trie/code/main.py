@@ -7,3 +7,5 @@ tr.insert(Arbol, "Hola")
 tr.insert(Arbol, "Rapido")
 tr.insert(Arbol, "Javier")
 tr.insert(Arbol, "Mameluco")
+# Caso 3: Inserto una palabra con el mismo prefijo sobre la "Rama Ppal" 
+tr.insert(Arbol, "Hollin")
