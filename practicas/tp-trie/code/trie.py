@@ -35,6 +35,7 @@ def insert(T, element):
         current = new_node
 
     for i in range(len(element)):
+
         if current.key == None:
             current.key = element[i]
             Flag = True
@@ -52,6 +53,7 @@ def insert(T, element):
             elif SearchL(current, element[i]) != None: 
                 current = SearchL(current, element[i])       ## Debo buscar otra manera de comparar el elemento ya que si el search es "None", tira error
                 if current.children != None:
+                    
                     current = current.children      ## Logre Insertar una parabla que tiene como prefijo otra, creo que se puede hacer mas eficiente
                 else:
                     Flag = True ## Con Esta linea logre agregar palabras mas largas
@@ -64,10 +66,14 @@ def insert(T, element):
                 current.children = new_node
                 new_node.key = element[i]
                 current = new_node
+            
             if element[i] == element[len(element)-1]:       ## Verifico si es el ultimo elemento de la palabra
+                if current.key != element[i]:
+                    current.parent.isEndOfWord = True
+                else:    
                     current.isEndOfWord = True
                 
-
+   
 
 
     
