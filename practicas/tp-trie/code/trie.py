@@ -46,13 +46,14 @@ def insert(T, element):
                 new_node = TrieNode()       ## Se complica al insertar mas de dos palablar porque empiezan a pisar el campo nextNode y no se conectan de forma efectiva
                 new_node.nextNode = current.nextNode        ## Al agregar esta linea logre insertar mas de 2 palabras a la primera fila    
                 current.nextNode = new_node
-                new_node.key = element[i]
+                new_node.key = element[i]           ## Me falta asignar bien los parents aca
                 Flag = True
                 current = new_node
             
             elif SearchL(current, element[i]) != None: 
                 current = SearchL(current, element[i])       ## Debo buscar otra manera de comparar el elemento ya que si el search es "None", tira error
-                if current.children != None:
+                ## Al insertar la palabra mamarracho falla por la iteracion numero 5, ya que al repetir el valor del nodo, falla en...
+                if current.children != None:  ## ... Esta parte
                     
                     current = current.children      ## Logre Insertar una parabla que tiene como prefijo otra, creo que se puede hacer mas eficiente
                 else:
@@ -76,35 +77,6 @@ def insert(T, element):
    
 
 
-    
-
-
-
-
-'''
-
-
-
-    insertR(T.root, lista)
-
-
-def insertR(Tnode, lista):
-
-    if lista != []:
-       
-       new_node = TrieNode()
-       Tnode.children = new_node
-       new_node.parent = Tnode
-       new_node.key = lista.pop(0) 
-       return insertR(new_node, lista)
-       
-    else:
-       Tnode.isEndOfWord = True
-
-    return
-  
-
-'''
 def SearchL(Node, element):
 
     while Node != None:
@@ -114,3 +86,24 @@ def SearchL(Node, element):
             Node = Node.nextNode
     return None
     
+def search(T, element):
+
+    current = T.root.children
+    return searchR(current, element)
+
+def searchR(current, element):
+
+    if current == None:
+        return False
+    
+    pos = SearchL(current, element[0])
+    aux = pos != None
+
+    if aux == False:
+        return False
+    
+    if len(element) == 1 and pos.isEndOfWord == True:
+        return True
+    element = element[1:]
+
+    return searchR(pos.children, element)

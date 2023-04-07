@@ -26,4 +26,29 @@ tr.insert(Arbol, "Rapaz")
 
 
 
-print("Hola")
+print(tr.search(Arbol, "Hola"))
+print(tr.search(Arbol, "Holanda"))
+print(tr.search(Arbol, "Holandas"))
+print(tr.search(Arbol, "Hollin"))
+print(tr.search(Arbol, "Hollow"))
+print(tr.search(Arbol, "Hol"))
+print(tr.search(Arbol, "Homero"))
+print(tr.search(Arbol, "Mameluco"))
+print(tr.search(Arbol, "Mama"))
+print(tr.search(Arbol, "Mamarracho"))
+print(tr.search(Arbol, "Javier"))
+print(tr.search(Arbol, "Javiera"))
+print(tr.search(Arbol, "Java"))
+print(tr.search(Arbol, "Rapido"))
+print(tr.search(Arbol, "Rapidin"))
+print(tr.search(Arbol, "Rapaz"))
+
+
+
+
+
+
+
+
+
+
