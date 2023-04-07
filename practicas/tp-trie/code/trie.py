@@ -48,6 +48,9 @@ def insert(T, element):
                 current.nextNode = new_node
                 new_node.key = element[i]           ## Me falta asignar bien los parents aca
                 Flag = True
+                # Experimental
+                new_node.parent = current.parent
+                ##
                 current = new_node
             
             elif SearchL(current, element[i]) != None: 
@@ -68,7 +71,7 @@ def insert(T, element):
                 new_node.key = element[i]
                 current = new_node
             
-            if element[i] == element[len(element)-1]:       ## Verifico si es el ultimo elemento de la palabra
+            if element[i] == element[len(element)-1] and i == len(element)-1:       ## Verifico si es el ultimo elemento de la palabra
                 if current.key != element[i]:
                     current.parent.isEndOfWord = True
                 else:    
@@ -107,3 +110,42 @@ def searchR(current, element):
     element = element[1:]
 
     return searchR(pos.children, element)
+
+
+def delete(T, element):
+
+    current = T.root.children
+
+    if search(T, element) == False:
+        return False
+
+
+    return deleteR(current, element)
+
+def deleteR(current, element):
+
+    current = toEndofWord(current, element)
+
+    if current.children != None and current.isEndOfWord == True:
+        current.isEndOfWord = False
+        return True
+    
+     
+
+
+def toEndofWord(List, element):
+    
+    current = SearchL(List, element[0])
+
+    if current != None and current.children != None:
+        current = current.children
+    if current.key == element[len(element)-1] and current.isEndOfWord == True:
+        return current
+    element = element[1:]
+    return toEndofWord(current, element)
+
+
+
+
+
+    
