@@ -50,9 +50,13 @@ def insert(T, element):
                 current = new_node
             
             elif SearchL(current, element[i]) == current:        ## Debo buscar otra manera de comparar el elemento ya que si el search es "None", tira error
-
-                current = current.children      ## Logre Insertar una parabla que tiene como prefijo otra, creo que se puede hacer mas eficiente
-                continue
+                if current.children != None:
+                    current = current.children      ## Logre Insertar una parabla que tiene como prefijo otra, creo que se puede hacer mas eficiente
+                elif current.nextNode != None:
+                    current = current.nextNode
+                else:
+                    Flag = True ## Con Esta linea logre agregar palabras mas largas
+                    continue
 
             else:  
                 
