@@ -25,10 +25,13 @@ tr.insert(Arbol, "Rapaz")
 
 
 
+print(tr.delete(Arbol, "Holanda"))
 print(tr.delete(Arbol, "Hola"))
+print(tr.delete(Arbol, "Java"))
+
+tr.PrintChain(Arbol, "Ho", 4)
 
 
-print(tr.search(Arbol, "Holanda"))
 '''
 print(tr.search(Arbol, "Holandas"))
 print(tr.search(Arbol, "Hollin"))

@@ -10,7 +10,8 @@ class TrieNode:
   key = None
   isEndOfWord = False
 
-
+class linkedlist:
+    head = None
 
 
 
@@ -118,17 +119,31 @@ def delete(T, element):
 
     if search(T, element) == False:
         return False
+    
+    EndWord = toEndofWord(current, element)
 
 
-    return deleteR(current, element)
+    # Funciona Caso 0: Palabra dentro de palabra
 
-def deleteR(current, element):
-
-    current = toEndofWord(current, element)
-
-    if current.children != None and current.isEndOfWord == True:
+    if current.children != None and current.isEndOfWord is True:
         current.isEndOfWord = False
         return True
+    
+    # Funciona Caso 1: Nodo final solitario
+    
+    if current.children is None and current.isEndOfWord is True:
+        if current.nextNode is None:
+            
+            current.parent.children = None
+        elif current.nextNode is not None:
+            aux = current
+            current.parent.children = aux.nextNode
+   
+
+
+
+            
+
     
      
 
@@ -145,7 +160,68 @@ def toEndofWord(List, element):
     return toEndofWord(current, element)
 
 
+def PrintChain(T, p, n):
 
+    if T.root == None:
+        return None
+    
+    last_node = toEndofPattern(T.root.children, p)
+
+    if last_node == None:
+        return None
+    
+    n = n - len(p)
+
+    while n > 0:
+
+        if last_node.children != None:
+            last_node = last_node.children
+        else:
+            return
+        n -= 1
+
+    ListaPalabras = []
+    CheckEnd(last_node, ListaPalabras)
+    print(ListaPalabras)
+
+
+    
+
+
+def CheckEnd(List, ListaPalabras):       ## Checkea que alguno de los elementos de la lista tenga EndOfWord = True
+    if List == None:
+        return None
+    if List.isEndOfWord == True:
+        aux = ""    
+        palabra = AlmacenarPalabra(List, aux)
+        ListaPalabras = ListaPalabras.append(palabra)
+    else:
+        CheckEnd(List.nextNode, ListaPalabras)
+
+def AlmacenarPalabra(List, aux):
+
+    if List.key == None:
+        return aux
+    aux = aux + List.key
+    return AlmacenarPalabra(List.parent, aux)
+
+def toEndofPattern(List, element):
+    
+    current = SearchL(List, element[0])
+
+    if current != None:
+        current = current.children
+    else:
+        return None
+    if current.key == element[len(element)-1]:
+        return current
+    element = element[1:]
+    return toEndofPattern(current, element)
+
+
+'''
+
+'''
 
 
     
