@@ -171,18 +171,19 @@ def PrintChain(T, p, n):
         return None
     
     n = n - len(p)
+    ListaPalabras = []
 
     while n > 0:
 
         if last_node.children != None:
             last_node = last_node.children
+            
         else:
             return
         n -= 1
 
-    ListaPalabras = []
     CheckEnd(last_node, ListaPalabras)
-    print(ListaPalabras)
+    return ListaPalabras
 
 
     
@@ -190,19 +191,20 @@ def PrintChain(T, p, n):
 
 def CheckEnd(List, ListaPalabras):       ## Checkea que alguno de los elementos de la lista tenga EndOfWord = True
     if List == None:
-        return None
+        return 
     if List.isEndOfWord == True:
-        aux = ""    
+        aux = ''    
         palabra = AlmacenarPalabra(List, aux)
-        ListaPalabras = ListaPalabras.append(palabra)
-    else:
-        CheckEnd(List.nextNode, ListaPalabras)
+        ListaPalabras.append(palabra)
 
-def AlmacenarPalabra(List, aux):
+    CheckEnd(List.nextNode, ListaPalabras)
+    return ListaPalabras
+
+def AlmacenarPalabra(List, aux):        ## Almacena una palabra accediendo a los keys de los parents
 
     if List.key == None:
         return aux
-    aux = aux + List.key
+    aux = List.key + aux
     return AlmacenarPalabra(List.parent, aux)
 
 def toEndofPattern(List, element):

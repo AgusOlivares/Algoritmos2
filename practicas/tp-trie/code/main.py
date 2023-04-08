@@ -9,6 +9,8 @@ tr.insert(Arbol, "Javier")
 tr.insert(Arbol, "Mameluco")
 # Caso 3: Inserto palabras con el mismo prefijo sobre la "Rama Ppal"       # Funciona
 tr.insert(Arbol, "Hollin")
+tr.insert(Arbol, "Holo")
+tr.insert(Arbol, "Hora")
 tr.insert(Arbol, "Homero")
 tr.insert(Arbol, "Hollow")
 # Caso 4: Inserto palabras mas largas y mas cortas sobre la "Rama Ppal"      # Funciona
@@ -29,7 +31,7 @@ print(tr.delete(Arbol, "Holanda"))
 print(tr.delete(Arbol, "Hola"))
 print(tr.delete(Arbol, "Java"))
 
-tr.PrintChain(Arbol, "Ho", 4)
+print(tr.PrintChain(Arbol, "Ho", 4))
 
 
 '''
