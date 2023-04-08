@@ -172,17 +172,30 @@ def PrintChain(T, p, n):
     
     n = n - len(p)
     ListaPalabras = []
+    current = last_node
+    aux = n
 
+
+    ## He posicionado mal los marcadores, imaginate que te estas moviendo por algo parecido a una matriz (No es una matriz, ojo)
+    ## Tengo que cambiarlos por algo mas facil de manejar que un while, intentar con un "for"
+    ## El caso que se me complica es revisar los nodos en forma de "Escalera"
     while n > 0:
+        while aux > 0:
+            if current.nextNode != None:
+                current = current.children
+
+
+            aux -= 1
+        CheckEnd(last_node, ListaPalabras)    
 
         if last_node.children != None:
             last_node = last_node.children
-            
-        else:
-            return
-        n -= 1
+            current = last_node
 
-    CheckEnd(last_node, ListaPalabras)
+        n -= 1
+    CheckEnd(current, ListaPalabras)
+
+    #CheckEnd(last_node, ListaPalabras)
     return ListaPalabras
 
 
