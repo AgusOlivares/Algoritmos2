@@ -95,4 +95,28 @@ def suma_Ascii(elem):
 def isConj(elem):
     return len(elem) == len(set(elem)) # O(n):longitud lista + O(n):set, recorre todos los elem y saca los repetidos 
 
+def compress(elem):
+
+    if isConj(elem):
+        return elem
+    else:
+        lista = ""
+        cont = 0
+
+        for i in range(len(elem)):
+            if i == 0:
+                lista += elem[i]
+                cont += 1
+                continue
+            if elem[i] == lista[-1]:
+                cont += 1
+            else:
+                lista += str(cont) + elem[i]
+                cont = 1
+        lista += str(cont)
+
+        return lista
+            
+            
+
 # def Ordered       # Estaria bueno implementar una manera de insertar los elementos y que queden ordenados 

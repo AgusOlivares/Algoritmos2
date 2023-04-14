@@ -18,4 +18,4 @@ d.insert(list, 24, "Pera") #0
 
 #print(list)
 
-print(d.isConj("elm"))
+print(d.compress("aabcccccaAAAAAa"))
