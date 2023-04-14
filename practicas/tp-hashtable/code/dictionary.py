@@ -65,9 +65,34 @@ def delete(D, key):
                     else:
                         node.nextNode = node.nextNode.nextNode
             return D
+        
+
+# O(2n) = O(n)
+
+def isPermutation(elem1, elem2):
+    
+    if len(elem1) != len(elem2):
+        return False
+    
+    sum1 = sum(ord(c) for c in elem1)       # Optimizacion de codigo, elimino lineas innecesarias  # O(n)
+    sum2 = sum(ord(c) for c in elem2)       # O(n): 
+
+    #sum1 = suma_Ascii(elem1)
+    #sum2 = suma_Ascii(elem2)
+
+    return sum1 == sum2
+    
 
 
+def suma_Ascii(elem):
+    lista = list(elem)
+    sum = 0
+    for i in range(len(elem)):
+        sum += ord(lista[i])  
+    return sum
 
-
+# O(2n) == O(n)
+def isConj(elem):
+    return len(elem) == len(set(elem)) # O(n):longitud lista + O(n):set, recorre todos los elem y saca los repetidos 
 
 # def Ordered       # Estaria bueno implementar una manera de insertar los elementos y que queden ordenados 
