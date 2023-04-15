@@ -18,4 +18,4 @@ d.insert(list, 24, "Pera") #0
 
 #print(list)
 
-print(d.compress("aabcccccaAAAAAa"))
+print(d.compress("aabcccccaaa"))

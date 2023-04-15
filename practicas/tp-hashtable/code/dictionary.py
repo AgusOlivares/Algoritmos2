@@ -81,7 +81,6 @@ def isPermutation(elem1, elem2):
     #sum2 = suma_Ascii(elem2)
 
     return sum1 == sum2
-    
 
 
 def suma_Ascii(elem):
@@ -91,9 +90,9 @@ def suma_Ascii(elem):
         sum += ord(lista[i])  
     return sum
 
-# O(2n) == O(n)
+# O(n + n^2) == O(n^2)
 def isConj(elem):
-    return len(elem) == len(set(elem)) # O(n):longitud lista + O(n):set, recorre todos los elem y saca los repetidos 
+    return len(elem) == len(ConvertToSet(elem)) # O(n):longitud lista + O(n^2):set, recorre todos los elem y saca los repetidos 
 
 def compress(elem):
 
@@ -117,6 +116,13 @@ def compress(elem):
 
         return lista
             
-            
+def ConvertToSet(elem):
+    lista = []
+
+    for i in range(len(elem)):
+        if elem[i] not in lista:
+            lista.append(elem[i])
+        
+    return lista
 
 # def Ordered       # Estaria bueno implementar una manera de insertar los elementos y que queden ordenados 
