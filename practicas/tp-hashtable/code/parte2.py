@@ -17,12 +17,64 @@ def isPermutation(elem1, elem2):
 
     return sum1 == sum2
 
+def isPermutation_ver2(elem1, elem2):   # Utilizo hash, almaceno cada caracter en una tabla. Me parece que no hace mucha falta ya que en tal caso
+                                        # pasaria por parametros dos valores que busque en la hash, pero esta buena la implementacion
+
+    flag = True
+
+    if len(elem1) != len(elem2):
+        flag = False
+
+    m = 27 # caracteres desde la a - z 
+    hash_function = lambda k : ord(k) % m
+
+    dicc = d.Dictionary(hash_function, m)
+    for i in elem1:
+        dicc.insert(dict.D, i, str(i))
+    for i in elem2:
+        pos = dicc.search(dicc.D, i)
+
+        if pos == None:
+            flag = False
+    
+    return flag
+
+
+
+
 
     # Ejercicio 5
 
 # O(n + n^2) == O(n^2)
 def isConj(elem):
     return len(elem) == len(ConvertToSet(elem)) # O(n):longitud lista + O(n^2):set, recorre todos los elem y saca los repetidos 
+
+
+def isConj_v2(elem):
+
+    m = len(elem)
+
+    A = (math.sqrt(5)-1)/2
+
+    hash_function = lambda k : int(m*((k*A)% 1))
+
+    dicc = d.Dictionary(hash_function, m)
+
+    for key in elem:
+        dicc.insert(dicc.D, key, str(key))
+
+    count = 0
+
+    for key in elem:
+        if dicc.search(dicc.D, key) != None:
+            dicc.delete(dicc.D, key)
+            count += 1
+
+    if count == m:
+        return True
+    else:
+        return False
+
 
     # Ejercicio 6
 def Codigo_postal_hash(cp):
@@ -36,6 +88,10 @@ def Codigo_postal_hash(cp):
     return suma_ascii
 
     # Ejercicio 7
+
+    """
+    Complejidad de O(n) ya que itero una lista de longitud n, no encontre aplicacion efectiva en diccionarios
+    """
 def compress(elem):
 
     if isConj(elem):
@@ -71,7 +127,9 @@ def ConvertToSet(elem):
     # Ejercicio 8
     
 
-#
+"""
+Complejidad de O(n), ya que itero solamente una lista de longitud n. Aun no logro implementar diccionarios de forma efectiva
+"""
 
 def isIn(texto, cadena):        # Use un tipo de algoritmo llamado KMP (Knut - Morris - Pratt), investigar mas a fondo
 
