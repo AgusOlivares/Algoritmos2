@@ -15,7 +15,11 @@ d.insert(list, 24, "Pera") #0
 
 #print(d.delete(list, 9))
 
-
 #print(list)
 
-print(d.compress("aabcccccaaa"))
+#print(d.compress("aabcccccaaa"))
+
+#print(d.isIn("xxxxyxxxxzzxxxxyz", "xyz"))
+print(d.Codigo_postal_hash("Z9999ZZZ"))
+
+

@@ -10,7 +10,19 @@ def hash(A, k):
     #if         # Quiero poner condicion para utilizar distintas funciones de hash segun la situacion 
     return k % len(A)
 
+    # Ejercicio 6
+def Codigo_postal_hash(cp):
+    suma_ascii = 0
+    k = 0
+    for i in range(len(cp)):
+        suma_ascii += ord(cp[i]) * 10**k 
+        k += 1
 
+    # primo_grande = 4332221111 quiero dar una funcion de hash, pero va a ocumar muchisimo espacio de esta forma
+    return suma_ascii
+
+
+# def Ordered       # Estaria bueno implementar una manera de insertar los elementos en la tabla y que queden ordenados 
 def insert(D, k, val):
 
     pos = hash(D,k)
@@ -67,6 +79,8 @@ def delete(D, key):
             return D
         
 
+    # Ejercicio 4
+
 # O(2n) = O(n)
 
 def isPermutation(elem1, elem2):
@@ -90,9 +104,13 @@ def suma_Ascii(elem):
         sum += ord(lista[i])  
     return sum
 
+    # Ejercicio 5
+
 # O(n + n^2) == O(n^2)
 def isConj(elem):
     return len(elem) == len(ConvertToSet(elem)) # O(n):longitud lista + O(n^2):set, recorre todos los elem y saca los repetidos 
+
+    # Ejercicio 7
 
 def compress(elem):
 
@@ -125,4 +143,47 @@ def ConvertToSet(elem):
         
     return lista
 
-# def Ordered       # Estaria bueno implementar una manera de insertar los elementos y que queden ordenados 
+
+    # Ejercicio 9
+    
+
+#
+
+def isIn(texto, cadena):        # Use un tipo de algoritmo llamado KMP (Knut - Morris - Pratt), investigar mas a fondo
+
+    L_cadena = len(cadena)
+    L_texto = len(texto)
+
+    pref_table = [0]*(L_cadena)         # Creo una tabla del prefijo para poder facilitar el posicionamiento del señalador
+    pointer = 0         # Señalador
+
+    for i in range(1, L_cadena):        # Defino las repeticiones de las letras llenando la tabla
+
+        while pointer > 0 and cadena[i] != cadena[pointer]:
+            pointer = pref_table[pointer-1]
+        if cadena[pointer] == cadena[i]:
+            pointer += 1
+            pref_table[i] = pointer
+
+    pointer = 0 
+    for i in range(L_texto):
+        while pointer > 0 and cadena[pointer] != texto[i]:
+            pointer = pref_table[pointer-1]
+        if cadena[pointer] == texto[i]:
+            pointer += 1
+            if pointer == L_cadena:
+                return i - L_cadena + 1
+
+
+
+
+    return False
+
+
+
+
+#def isSubConj(C, S):
+
+
+    
+
