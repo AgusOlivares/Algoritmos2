@@ -1,7 +1,7 @@
 class DictionaryNode:
     def __init__(self, key = None, value = None):
-        key = key
-        value = None
+        self.key = key
+        self.value = value
         
 
 class Dictionary:
@@ -19,29 +19,33 @@ class Dictionary:
 
         new_k = self.hash_function(k)
 
+
         if D[new_k] is None:
             node = DictionaryNode(k, val)
             D[new_k] = []
             D[new_k].append(node)
         else:
             
+            
             node = DictionaryNode(k, val)
-            D[new_k] = []
-            if node in D[new_k]:
+            
+            if search_key(k, D[new_k]) != None:     # Reviso que la key no exista ya asociada a un valor
+                return D
+            if search_inList(val, D[new_k]) == False:   # Reviso que el valor no exista ya asociado a una key
                 D[new_k].append(node)
             
         return D
 
-    def search(self, D, key):
+    def search(self, D, k):
 
-        new_k = self.hash_function
+        new_k = self.hash_function(k)
 
         if D[new_k] is None:
-            return None
+            return D
         else:
             list = D[new_k]
-            pos = search_key()
-            if pos != None:
+            pos = search_key(k, list)
+            if pos == None:
                 return None
             else:
                 return list[pos].value
@@ -55,7 +59,7 @@ class Dictionary:
         else:
 
             list = D[new_k]
-            pos = search_key(k)
+            pos = search_key(k, list)
 
             if pos is None:
                 return D

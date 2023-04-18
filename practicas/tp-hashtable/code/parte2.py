@@ -30,7 +30,7 @@ def isPermutation_ver2(elem1, elem2):   # Utilizo hash, almaceno cada caracter e
 
     dicc = d.Dictionary(hash_function, m)
     for i in elem1:
-        dicc.insert(dict.D, i, str(i))
+        dicc.insert(dicc.D, i, str(i))
     for i in elem2:
         pos = dicc.search(dicc.D, i)
 
@@ -50,7 +50,11 @@ def isConj(elem):
     return len(elem) == len(ConvertToSet(elem)) # O(n):longitud lista + O(n^2):set, recorre todos los elem y saca los repetidos 
 
 
-def isConj_v2(elem):
+def isConj_v2(elem): 
+
+    """
+    Complejidad de O(n) ya que el las operaciones de insercion busqueda y delete son O(1)
+    """
 
     m = len(elem)
 
@@ -79,13 +83,16 @@ def isConj_v2(elem):
     # Ejercicio 6
 def Codigo_postal_hash(cp):
     suma_ascii = 0
-    k = 0
+    
     for i in range(len(cp)):
-        suma_ascii += ord(cp[i]) * 10**k 
-        k += 1
+        suma_ascii += ord(cp[i]) * 10**i 
+        
 
-    # primo_grande = 4332221111 quiero dar una funcion de hash, pero va a ocumar muchisimo espacio de esta forma
-    return suma_ascii
+    primo_grande = 100003 # la cantidad de combinaciones posibles ronda los 4 billones por lo que elijo un numero grande
+
+    new_k = suma_ascii % primo_grande
+    print("La insercion se realizo en la posicion ", new_k)
+    return new_k
 
     # Ejercicio 7
 
