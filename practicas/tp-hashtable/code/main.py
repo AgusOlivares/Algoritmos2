@@ -19,7 +19,7 @@ d.insert(list, 24, "Pera") #0
 
 #print(d.compress("aabcccccaaa"))
 
-#print(d.isIn("xxxxyxxxxzzxxxxyz", "xyz"))
-print(d.Codigo_postal_hash("Z9999ZZZ"))
+print(d.isIn("xxxxyxxxxzzxxxxyz", "xxz"))
+#print(d.Codigo_postal_hash("Z9999ZZZ"))
 
 
