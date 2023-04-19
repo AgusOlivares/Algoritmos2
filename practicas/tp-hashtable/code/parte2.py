@@ -81,18 +81,27 @@ def isConj_v2(elem):
 
 
     # Ejercicio 6
+
+def codigo_postal(dict, codigo):
+
+    print(f"el codigo postal se insertara en la posicion {Codigo_postal_hash(codigo)}")
+    dict.insert(dict.D, codigo, str(codigo))
+    return dict.D
+
 def Codigo_postal_hash(cp):
-    suma_ascii = 0
+
+    ## Como la catidad de combinaciones es muy grande (Ronda los 40 billones) elejimos un nº primo muy grande
+    m = 100003
+    parte_num = int(cp[1:5])
+    parte_string = cp[:1] + cp[5:]
+    parte_string_ascii = sum(ord(c)*10**k for c,k in zip(parte_string, [4,3,2,1]))
+    val = parte_num + parte_string_ascii
+    hash_function = val % m
     
-    for i in range(len(cp)):
-        suma_ascii += ord(cp[i]) * 10**i 
-        
+    return hash_function
 
-    primo_grande = 100003 # la cantidad de combinaciones posibles ronda los 4 billones por lo que elijo un numero grande
-
-    new_k = suma_ascii % primo_grande
-    print("La insercion se realizo en la posicion ", new_k)
-    return new_k
+    
+    
 
     # Ejercicio 7
 
@@ -163,12 +172,31 @@ def isIn(texto, cadena):        # Use un tipo de algoritmo llamado KMP (Knut - M
             if pointer == L_cadena:
                 return i - L_cadena + 1
 
+def isIn_v2(text, sub):
+    
+    aux = len(sub)
+    dict = d.Dictionary(hash_text, 97)
 
+    for i in range(len(text)):
+        if i+aux <= len(text):
+            new_char = text[i:i+aux]
+            dict.insert(dict.D, new_char, new_char)
+    found = dict.search(dict.D, sub)
+
+    return found != None
 
 
     return False
 
+def hash_text(text):
 
+    char_ascii = 0
 
+    for i in range(len(text)):
+        char_ascii += ord(text[i])*10**i
+
+    hash_function = char_ascii % 97
+
+    return hash_function
 
 #def isSubConj(C, S):

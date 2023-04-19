@@ -62,17 +62,25 @@ print(pt2.isConj_v2(lista_a))
 print(pt2.isConj_v2(lista_b))
 
 
-
 ## Ejercio 6:
-#dict = d.Dictionary(None, 100003)
-#dict.insert(dict.D, pt2.Codigo_postal_hash, "C1024CWN")
+
+dict = d.Dictionary(pt2.Codigo_postal_hash, 100003)
+
+pt2.codigo_postal(dict, "A9341ZJK")
+pt2.codigo_postal(dict, "A9371ZJZ")
+pt2.codigo_postal(dict, "Z9281KLZ")
+pt2.codigo_postal(dict, "K9913LPQ")
+pt2.codigo_postal(dict, "L0012ZLP")
+pt2.codigo_postal(dict, "U0912KKK")
 
 
 ## Ejercicio 7:
-print(pt2.compress("aabcccccaaa"))
+print(pt2.compress("aabcccccaaa")) 
 print(pt2.compress("asd"))
+ 
+## Ejercicio 8:
 
-#print(d.isIn("xxxxyxxxxzzxxxxyz", "xxz"))
-#print(d.Codigo_postal_hash("Z9999ZZZ"))
+print(pt2.isIn("xxxxyxxxxzzxxxxyz", "xxz"))
+print(pt2.isIn_v2("lava", "va"))  # intento con tablas hash
 
 
