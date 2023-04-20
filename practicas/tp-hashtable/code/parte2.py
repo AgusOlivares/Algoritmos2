@@ -199,4 +199,23 @@ def hash_text(text):
 
     return hash_function
 
-#def isSubConj(C, S):
+def isSubConj(C, S):
+
+    dict = d.Dictionary(None, 37) # elijo un numero primo 
+
+    for i in C:
+        dict.insert(dict.D, i, str(i)) 
+
+    for i in S:
+
+        aux = dict.search(dict.D, i)
+
+        if aux != str(i):
+            return False           
+
+    return True
+
+
+
+
+

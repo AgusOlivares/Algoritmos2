@@ -83,4 +83,23 @@ print(pt2.compress("asd"))
 print(pt2.isIn("xxxxyxxxxzzxxxxyz", "xxz"))
 print(pt2.isIn_v2("lava", "va"))  # intento con tablas hash
 
+## Ejercicio 9
+
+print("-"*20, "Ejercicio 9", "-"*20)
+
+conjunto = [1,2,3,4,5,6,7,8,9]
+
+subConj1 = [1,13,50,6]
+subConj2 = [1,2,3,4,5,6,7,8,9]
+subConj3 = [1,5,9,3]
+subConj4 = [1,5,6,3]
+subConj5 = [1,5,3]
+
+################ REVISAR
+
+print(pt2.isSubConj(conjunto, subConj1))
+print(pt2.isSubConj(conjunto, subConj2))
+print(pt2.isSubConj(conjunto, subConj4))
+
+
 
