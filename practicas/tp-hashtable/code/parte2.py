@@ -17,8 +17,12 @@ def isPermutation(elem1, elem2):
 
     return sum1 == sum2
 
-def isPermutation_ver2(elem1, elem2):   # Utilizo hash, almaceno cada caracter en una tabla. Me parece que no hace mucha falta ya que en tal caso
-                                        # pasaria por parametros dos valores que busque en la hash, pero esta buena la implementacion
+def isPermutation_ver2(elem1, elem2):   
+
+    """
+    El orden de complejidad es de O(n), las operaciones de busqueda e insercion son O(1) pero depende de la longitud del elemento
+    insertado por lo que sera O(n)
+    """
 
     flag = True
 
@@ -83,6 +87,11 @@ def isConj_v2(elem):
     # Ejercicio 6
 
 def codigo_postal(dict, codigo):
+
+    """
+    La complejidad sera de O(1) ya que la longitud de los codigos esta definida, las operaciones son aritmeticas (O(1)) y las operaciones 
+    de insercion y busqueda son O(1)
+    """
 
     print(f"el codigo postal se insertara en la posicion {Codigo_postal_hash(codigo)}")
     dict.insert(dict.D, codigo, str(codigo))
@@ -174,6 +183,12 @@ def isIn(texto, cadena):        # Use un tipo de algoritmo llamado KMP (Knut - M
 
 def isIn_v2(text, sub):
     
+    """
+    La complejidad sera de O(m+n) ya que depende de la longitud del texto insertado en la tabla (m) y la longitud del subtexto (n) 
+    que van a ser iterados, en uno para la insercion en tabla, y el otro en la busqueda
+    """
+
+
     aux = len(sub)
     dict = d.Dictionary(hash_text, 97)
 
@@ -199,7 +214,11 @@ def hash_text(text):
 
     return hash_function
 
-def isSubConj(C, S):
+def isSubConj(C, S): 
+
+    """
+    La complejidad sera de O(n), siendo n la longitud de la cadena mas larga
+    """
 
     dict = d.Dictionary(None, 37) # elijo un numero primo 
 
