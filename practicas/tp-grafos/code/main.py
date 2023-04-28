@@ -1,14 +1,23 @@
 import graph as g
 
-lista_vertices = [1, 2, 3, 4]
+# Initial Node and adjacency list
+vertex_list = [1, 2, 3, 4]
+adjacency_list = [(1, 2), (1, 4), (2, 3)]
 
-lista_adyacencia = [(1, 2), (1, 4), (2, 3)]
+# Initialize graph
+graph = g.Graph(vertex_list)
+graph.createGraph(vertex_list, adjacency_list)
 
-grafo = g.Graph(lista_vertices)
-grafo.createGraph(lista_vertices, lista_adyacencia)
+# Insert new Node
+graph.insert(0)
 
-grafo.insert(0)
+# Insert existing Node
+#graph.insert(1)
 
-grafo.link(0, 1)
+# Create new Link
+graph.link(0, 1)
 
-print(grafo._data.fromkeys)
+# Try Existing link
+#graph.link(2, 1)
+
+graph.printGraph()
