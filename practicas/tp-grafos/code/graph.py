@@ -11,10 +11,14 @@ class Graph:
     def __init__(self, n) -> None: 
         
         ## nodes in graph
-        self.n = n    
+        self._n = n    
 
         ## Test, data is stored in dictionary
         self._data : dict[list[GraphNode]] = {}
+
+    @property
+    def n(self):
+        return self._n
 
         
     def createGraph(self, vertices, aristas):
@@ -72,49 +76,97 @@ class Graph:
             conexiones = sorted(node.connect)
             print(f"{vertice}: {conexiones}")
 
-    def existPath(self, graph, v0, v1):
-
-        if v0 not in graph._data or v1 not in graph._data:
+    def existPath(self, v0, v1):
+        ## Verifico que los nodos ingresados existan dentro del grafo
+        if v0 not in self._data or v1 not in self._data:
             raise Exception("One or both vs not in graph")
         
+        ## Verifico si son iguales 
         if v0 == v1: return True
         
-        for i in graph._data[v0].connect:
-            if v1 in graph._data[v0].connect:
-                return True
-            else:
-                return self.existPath(graph , i , v1)
+        visited = set()
+        queue = [v0]
 
+        ## Busco mientras haya elementos en la cola
+        while queue:
+
+            aux = queue.pop(0)
+
+            # Si el vertice no ha sido visitado, lo agrego al conjunto
+            if aux not in visited:
+                visited.add(aux)
+                # Recorro los vertices adyacentes del vertice actual
+                for adjacent in self._data[aux].connect:
+                    
+                    # Si encuentro el vertice, retorno
+                    if adjacent == v1:
+                        return True
+                    
+                    queue.append(adjacent)
+                
         return False
     
-    def isConnected(self, graph):  ## RESOLVER Error
 
-        been = set([])
 
-        key = 0
+    def isConnected(self):   
 
-        lista = Graph.isConnected_recursive(graph, been, key)
 
-        return lista == graph.n
+        nodos = self.n.copy()
+
+        aux = nodos.pop()
+
+        for nodo in nodos:
+            if self.existPath(aux, nodo) != True: return False
+
+        return True  
+
+
+    def isTree(self):
+        
+        if self.isConnected() != True: return False
+
+        if self.existCycle(): return False ## REVISAR ESTA FUNCION
+        """
+        Al empezar a revisar la lista, inevitablemente al empezar a ver las listas de adyacencia
+        y empezar a encolar los elementos pueden llegar a repetirse los valores, encontrar una solucion a eso
+        """
+
+        print("hola")
+
+        return True
+
+
+
+    def existCycle(self): ## REVISAR, CON EL EJEMPLO DADO DEBERIA DAR FALSE
+        
+        nodos = self.n.copy()
+        v0 = nodos.pop(0)
+
+        visited = set()
+        queue = [v0]
+
+        while queue:
+
+            if queue.count(queue[0]) > 1:
+                return True
+
+            aux = queue.pop(0)
+
+            if aux not in visited:
+                visited.add(aux)
+
+                
+
+                for adjacent in self._data[aux].connect:
+                    queue.append(adjacent)
+                
         
 
-       
+    def isComplete(self):
 
-    def isConnected_recursive(graph, been, key):
-
-        node = graph._data[key]
-        
-        for i in node.connect:
-            
-            if i in been:
-                continue
-            else:
-                been.add(i)
-
-            graph.isConnected_recursive(graph , been , i)
-        
-        return been
-
+        if len(self._data[1].connect) != len(self.n)-1:
+            return False
+        return True
     
 
 
