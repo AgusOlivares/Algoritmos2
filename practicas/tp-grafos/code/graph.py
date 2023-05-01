@@ -174,7 +174,157 @@ class Graph:
         return True
     
 
+    def convertTree(self, graph):
+
+        if graph.isTree(graph): return graph
+
+        aux = graph.n.copy()
+        key = aux.pop()
+
+        visited = set()
+        edges = []
+        queue =[(key, None)]
+
+        while queue:
+            ## Aux va a ser el nodo de referencia "head"
+            node, parent = queue.pop(0) 
+
+            if node not in visited: 
+                visited.add(node)
+
+                if parent is not None:
+                    edges.append((parent, node))
+                
+                for adj in graph._data[node].connect:
+                    if adj not in visited:
+                        queue.append((adj, node))
+        
+        new_graph = Graph(self.n)
+        new_graph.createGraph(self.n, edges)
+
+        return new_graph
     
+
+    def countConnections(self, graph):
+        
+        if self.isConnected(): return 1
+
+        count = 0
+        visited = set()
+        aux = self.n.copy()
+        key = aux.pop()
+
+        for i in self.n:
+            if i not in visited:
+                visited.add(i)
+
+                if graph._data[i].connect == []:
+                    count += 1
+
+                    
+                else:
+                    count += 1
+                    for adj in graph._data[i].connect:
+                        visited.add(i)
+
+
+    def convertToBFSTree(self, graph, v):
+
+        if self.isConnected() == False: raise Exception("graph is not connected")
+
+        key = v
+
+        visited = set()
+        edges = []
+        queue =[(key, None)]
+
+        while queue:
+            ## Aux va a ser el nodo de referencia "head"
+            node, parent = queue.pop(0) 
+
+            if node not in visited: 
+                visited.add(node)
+
+                if parent is not None:
+                    edges.append((parent, node))
+
+                
+                ## Se recorre los vertices adacentes del node
+                for adj in graph._data[node].connect:
+                    if adj not in visited:
+                        queue.append((adj, node))
+        
+        new_graph = Graph(self.n)
+        new_graph.createGraph(self.n, edges)
+
+        return new_graph
+    
+    def convertToDFSTree(self, graph, v):
+
+        new_graph = Graph(graph.n)
+
+        visited = set()
+        edges = []
+        node = graph._data[v]
+
+        self.ConvertToDFS_recursive(graph, node, visited, edges)
+        
+        new_graph.createGraph(graph.n, edges)
+        return new_graph
+
+    def ConvertToDFS_recursive(self, graph, node, visited, edges):
+            
+
+        if node.key not in visited:
+
+            visited.add(node.key)
+
+            for adj in node.connect:
+
+                if adj not in visited:
+
+                    
+                    edges.append((node.key, adj))
+                    aux_node = graph._data[adj]
+
+                    self.ConvertToDFS_recursive(graph, aux_node, visited, edges)
+
+    def bestRoad(self, graph, v1, v2):
+
+        bfs_tree = graph.convertToBFSTree(graph, v1)
+        
+        edges = [(v2, None)]
+        nodes_path = set()
+
+        if v2 in bfs_tree._data[v1].connect: return (v1, v2)
+
+        while edges:
+            node, parent = edges.pop()
+            
+            for keys in bfs_tree._data:
+
+                if node in bfs_tree._data[keys].connect:
+
+                    if (bfs_tree._data[keys].key, node) not in edges:
+                        edges.append((bfs_tree._data[keys].key, node))
+                    
+        return edges        
+                
+           
+
+        
+
+            
+        
+
+
+
+
+
+
+
+
+
 
 
 
