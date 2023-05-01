@@ -121,53 +121,62 @@ class Graph:
         return True  
 
 
-    def isTree(self):
-        
-        if self.isConnected() != True: return False
+    def isTree(self, graph):
 
-        if self.existCycle(): return False ## REVISAR ESTA FUNCION
-        """
-        Al empezar a revisar la lista, inevitablemente al empezar a ver las listas de adyacencia
-        y empezar a encolar los elementos pueden llegar a repetirse los valores, encontrar una solucion a eso
-        """
+        def visit_TreeNode(graph, node, visited_key, inmediate_parent):
 
-        print("hola")
-
-        return True
-
-
-
-    def existCycle(self): ## REVISAR, CON EL EJEMPLO DADO DEBERIA DAR FALSE
-        
-        nodos = self.n.copy()
-        v0 = nodos.pop(0)
-
-        visited = set()
-        queue = [v0]
-
-        while queue:
-
-            if queue.count(queue[0]) > 1:
+            if node.key in visited_key:
                 return True
+            
 
-            aux = queue.pop(0)
+            visited_key.add(node.key)
 
-            if aux not in visited:
-                visited.add(aux)
-
+            for adj_node in graph._data[node.key].connect:
                 
+                if adj_node in visited_key:
+                    
+                    if graph._data[adj_node] != inmediate_parent: return False
 
-                for adjacent in self._data[aux].connect:
-                    queue.append(adjacent)
+                tree = visit_TreeNode(graph, graph._data[adj_node], visited_key, node)
+                if not tree: return False
+            return True
+
+        
+        if self.isConnected() == False: return False
+
+
+        visited_key = set()
+        components = 0
+
+        for node in graph._data:
+
+           if node not in visited_key:
+               
+                if components == 1:
+                    return False    
+
+                components += 1
+                tree = visit_TreeNode(graph, graph._data[node], visited_key, None)
+        if not tree: return False
+        return True
+                    
                 
         
 
     def isComplete(self):
 
-        if len(self._data[1].connect) != len(self.n)-1:
+        aux = self.n.copy()
+
+        aux2 = aux.pop()
+
+        if len(self._data[aux2].connect) != len(self.n)-1:
             return False
         return True
     
+
+    
+
+
 
 
                     
