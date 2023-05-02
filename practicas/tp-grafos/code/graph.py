@@ -288,27 +288,38 @@ class Graph:
                     aux_node = graph._data[adj]
 
                     self.ConvertToDFS_recursive(graph, aux_node, visited, edges)
-
-    def bestRoad(self, graph, v1, v2):
-
-        bfs_tree = graph.convertToBFSTree(graph, v1)
-        
-        edges = [(v2, None)]
-        nodes_path = set()
-
-        if v2 in bfs_tree._data[v1].connect: return (v1, v2)
-
-        while edges:
-            node, parent = edges.pop()
-            
-            for keys in bfs_tree._data:
-
-                if node in bfs_tree._data[keys].connect:
-
-                    if (bfs_tree._data[keys].key, node) not in edges:
-                        edges.append((bfs_tree._data[keys].key, node))
                     
-        return edges        
+
+    def bestRoad(self , graph ,  v1 , v2):
+
+        bfs_tree = self.convertToBFSTree(graph, v1)
+        visited = set()
+        queue = [(v1, None)]
+
+        while queue:
+            node, prev = queue.pop(0)
+
+            if node == v2:
+                #Construyo la ruta desde v1 a v2
+                path = []
+                while prev is not None:
+                    path.append((prev, node))
+                    node, prev = prev, bfs_tree._data[prev].parent
+                path.reverse()
+                return path
+
+            if node not in visited:
+                visited.add(node)
+                #El nodo anterior es el padre del nodo actual
+                bfs_tree._data[node].parent = prev 
+                #Recorro los nodos adyacentes
+                for adj in bfs_tree._data[node].connect:
+                    #Si el adyacente no ha sido visitado lo agrego a la cola
+                    if adj not in visited:
+                        queue.append((adj, node))
+
+        return None
+                
                 
            
 

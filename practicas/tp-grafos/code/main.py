@@ -64,8 +64,8 @@ print( "-"*20, " ConvertToDFS ", "-"*20)
 graph2.convertToDFSTree(graph2, 1).printGraph()
 
 
-print( "-"*20, " ConvertToDFS ", "-"*20)
-print(graph2.bestRoad(graph2, 1, 5))
+print( "-"*20, " BestRoadTo ", "-"*20)
+print(graph2.bestRoad(graph2, 1, 7))
 
 
 
