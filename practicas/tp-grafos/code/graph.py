@@ -1,36 +1,68 @@
 
 class GraphNode:
 
-    def __init__(self, key = None, color = "white") -> None:
+    def __init__(self, key = None) -> None:
         self.key = key 
-        self.color = color
+        self.edges = []
         self.connect = [] # funcionaria agregar un set() y en vez de append() un add()?
+
+        
+
+class Edge:
+
+    def __init__(self, vertex1, vertex2, weigth) -> None:
+        
+        self.vertex1 = vertex1
+        self.vertex2 = vertex2
+        self.weigth = weigth
 
 class Graph:
 
     def __init__(self, n) -> None: 
         
         ## nodes in graph
-        self._n = n    
+        self.n = n    
 
         ## Test, data is stored in dictionary
         self._data : dict[list[GraphNode]] = {}
+        self.edges = []
 
-    @property
-    def n(self):
-        return self._n
 
         
     def createGraph(self, vertices, aristas):
 
-        for vertex in vertices:
-            self.insert(vertex)
+       if len(aristas[0]) < 3:
+            for vertex in vertices:
+                self.insert(vertex)
             
 
-        for (vertice0, vertice1) in aristas:
-            self.link(vertice0, vertice1)
+            for (vertice0, vertice1) in aristas:
+                self.link(vertice0, vertice1)
+                
+            return 
+       else:
+           raise Exception("Edges have 3 components instead of 2, try 'createPonderedGraph' instead")
+    
+    def createPonderedGraph(self, vertices, aristas):
+
+        if len(aristas[0]) == 3:
+            for vertex in vertices:
+                self.insert(vertex)
             
-        return 
+
+            for (vertice0, vertice1, weigth) in aristas:
+                self.link(vertice0, vertice1)
+                new_Edge = Edge(vertice0, vertice1, weigth) # Creo un objeto arista con los dos nodos que la forman
+                self._data[vertice0].edges.append(new_Edge)
+                self._data[vertice1].edges.append(new_Edge)
+                self.edges.append(new_Edge)
+            
+            
+            return 
+        else:
+            raise Exception("Edges have 2 components instead of 3, try 'createGraph' instead")
+
+
         
         
     def link(self, vertice0, vertice1):
@@ -319,6 +351,14 @@ class Graph:
                         queue.append((adj, node))
 
         return None
+    
+    def Kruskal(self, graph):
+
+
+
+        new_graph = Graph(graph.n)
+
+
                 
                 
            
