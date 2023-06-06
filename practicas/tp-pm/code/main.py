@@ -3,7 +3,7 @@ import pm
 line = "radar"
 line2 = "anita lava la tina"
 line3 = "aaabccddd"
-line4 = "aaaallaaammmmmmadsgxfdxrrisxxco"
+line4 = "aaaaaaammmmmmdsgrxfdxrrisxxclxco"
 
 print(pm.existChar(line, "a"))
 print(pm.isPalindrome(line2))
